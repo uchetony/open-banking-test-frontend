@@ -5,8 +5,6 @@ function PublicRoute({ children, ...rest }: RouteProps) {
 
     const isAuthenticated = !!window.localStorage.getItem("open_banking_token");
 
-    console.log(isAuthenticated);
-
     return (
         <Route {...rest}>
             { !isAuthenticated ? children : <Redirect to={{ pathname: "/", state: { from: location } }} /> }
