@@ -1,7 +1,11 @@
+import { useUser } from 'contexts/user';
+
 function Home() {
+    const [user] = useUser();
+
     return (
         <div>
-            Home page
+            Welcome {user.email}
         </div>
     )
 }

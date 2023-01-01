@@ -3,7 +3,7 @@ import { Redirect, Route, RouteProps, useLocation } from 'react-router-dom';
 function ProtectedRoute({ children, ...rest }: RouteProps) {
     const location = useLocation();
 
-    const isAuthenticated = !!window.localStorage.getItem("open_banking_token");
+    const isAuthenticated = !!localStorage.getItem("open_banking_token");
 
 
     return (
