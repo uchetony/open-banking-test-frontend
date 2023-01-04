@@ -39,12 +39,12 @@ function Home() {
                         <p>{account.name}</p>
                     </Box>
                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                        <p>Bank:</p>
-                        <p>{account.institution.name}</p>
+                        <p>Account:</p>
+                        <p>{`${account.accountNumber} ${account.institution.name}`}</p>
                     </Box>
                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                        <p>Account Number:</p>
-                        <p>{account.accountNumber}</p>
+                        <p>Balance:</p>
+                        <p>{`NGN ${account.balance / 100}`}</p>
                     </Box>
                 </AccountCard>
             ))}
