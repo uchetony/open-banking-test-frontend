@@ -12,14 +12,13 @@ API.interceptors.response.use(
 );
 
 export const updateApiAuthorization = (token: string) => {
-    API.defaults.baseURL = `${process.env.REACT_APP_API_BASE_URL}/api`;
+    API.defaults.baseURL = `${process.env.REACT_APP_API_BASE_URL}/api`
     API.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
 
 const getTokenAndUpdateApiAuthorization = () => {
     try {
-        const currentToken = localStorage.getItem("open_banking_token");
-        const token = currentToken && JSON.parse(currentToken);
+        const token = localStorage.getItem("open_banking_token");
 
         if (token) updateApiAuthorization(token);
     } catch(_) {}
