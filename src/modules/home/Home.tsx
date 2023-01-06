@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Alert, AlertTitle, Snackbar, Box } from '@mui/material';
 import API from 'api';
+import LinkAccount from 'components/LinkAccount';
 import { useQuery } from 'react-query';
 
 const AccountCard = styled(Box)`
@@ -30,24 +31,27 @@ function Home() {
 				</Alert>
 			</Snackbar>
 
-            <h1>Accounts</h1>
+            <LinkAccount />
 
-            {(data||[]).map((account: any) => (
-                <AccountCard key={account.accountNumber}>
-                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                        <p>Name:</p>
-                        <p>{account.name}</p>
-                    </Box>
-                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                        <p>Account:</p>
-                        <p>{`${account.accountNumber} ${account.institution.name}`}</p>
-                    </Box>
-                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                        <p>Balance:</p>
-                        <p>{`NGN ${account.balance / 100}`}</p>
-                    </Box>
-                </AccountCard>
-            ))}
+            <Box>
+                <h1>Accounts</h1>
+                {(data||[]).map((account: any) => (
+                    <AccountCard key={account.accountNumber}>
+                        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                            <p>Name:</p>
+                            <p>{account.name}</p>
+                        </Box>
+                        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                            <p>Account:</p>
+                            <p>{`${account.accountNumber} ${account.institution.name}`}</p>
+                        </Box>
+                        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                            <p>Balance:</p>
+                            <p>{`NGN ${account.balance / 100}`}</p>
+                        </Box>
+                    </AccountCard>
+                ))}
+            </Box>
         </Box>
     )
 }
