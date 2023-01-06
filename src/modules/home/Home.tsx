@@ -10,14 +10,16 @@ const AccountCard = styled(Box)`
     padding: 20px;
     border-radius: 5px;
     color: white;
+    margin-bottom: 5px;
 `
 
 function Home() {
-    const { data, isError } = useQuery('accounts', () => {
+    const { data: accounts, isError, isFetching, isRefetching } = useQuery('accounts', () => {
         return API.get('accounts');
     }, {
         select: ({ data }) => data
-    })
+    });
+
 
     return (
         <Box sx={{ padding: "0 20px" }}>
@@ -35,8 +37,11 @@ function Home() {
 
             <Box>
                 <h1>Accounts</h1>
-                {(data||[]).map((account: any) => (
-                    <AccountCard key={account.accountNumber}>
+
+                { (isFetching || isRefetching) && <Box>Fetching accounts... </Box> }
+
+                {(accounts||[]).map((account: any) => (
+                    <AccountCard key={account.institution.bankCode}>
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                             <p>Name:</p>
                             <p>{account.name}</p>
