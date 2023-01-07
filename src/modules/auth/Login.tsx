@@ -100,10 +100,10 @@ function Login() {
 					<Box>
 						<Button 
 							variant='contained' 
-							disableElevation color='success' 
+							disableElevation
 							type='submit' 
 							disabled={loginMutation.isLoading}
-							sx={{ padding: '10px' }}
+							sx={{ padding: '20px', backgroundColor: 'black' }}
 							fullWidth
 						>
 							{loginMutation.isLoading ? 'Submit...' : 'Submit'}
