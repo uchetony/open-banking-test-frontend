@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import MonoConnect from '@mono.co/connect.js';
 import { useMutation, useQueryClient } from 'react-query';
+import { Plus } from 'components/icons';
 import API from 'api';
 
 
@@ -34,10 +35,13 @@ function LinkAccount() {
     }, [verifyAccountMutation]);
 
     return (
-        <Box>
-            <Button variant="contained" onClick={() => monoConnect.open()}>
-                { verifyAccountMutation.isLoading ? 'Linking Account...' : 'Link Account' }
-            </Button>
+        <Box 
+            sx={{ width:"50px", height:"50px", bgcolor:"lightgrey", 
+            borderRadius:"5px", display:"flex", alignItems:"center",
+            justifyContent:"center", cursor:"pointer" }}
+            onClick={() => monoConnect.open()}
+        >
+            <Plus color="black" />
         </Box>
     )
 }

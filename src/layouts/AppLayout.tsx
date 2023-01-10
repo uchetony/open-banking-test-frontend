@@ -53,7 +53,8 @@ function AppLayout ({ children }: { children: JSX.Element }) {
                     </LinkContainer>
                 </Box>
             </SideNav>
-            <Box ml="400px" position="fixed" width="calc(100% - 400px)">
+
+            <Box ml="400px" position="fixed" width="calc(100% - 400px)" px="50px">
                 <Box height="100px" mt="50px" display="flex" alignItems="center" pr="50px" borderBottom="1px solid black">
                     <Box>Header</Box>
                 </Box>
