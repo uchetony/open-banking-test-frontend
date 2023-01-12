@@ -1,17 +1,19 @@
 import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import API from "api";
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { Thrash } from "./icons";
 
 function UnlinkAccount({ account }: { account: any }) {
     const [open, setOpen] = useState(false);
+    const queryClient = useQueryClient();
 
     const unlinkAccountMutation = useMutation(() => {
-        return API.post(`/accounts/${account.accountNumber}/unlink`)
+        return API.post(`/accounts/${account.id}/unlink`)
     }, {
         onSuccess: () => {
             setOpen(false);
+            queryClient.invalidateQueries('accounts');
             alert("Account unlinked successfully")
         },
         onError: (error: { message: string }) => {
