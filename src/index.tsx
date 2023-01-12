@@ -4,6 +4,7 @@ import './index.css';
 import App from './modules/App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import GlobalLoadingIndicator from 'components/GlobalLoadingIndicator';
 
 
 const root = ReactDOM.createRoot(
@@ -20,7 +21,7 @@ const queryClient = new QueryClient({
 
 root.render(
   <React.StrictMode>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<GlobalLoadingIndicator />}>
       <QueryClientProvider client={queryClient}>
         <App />
       </QueryClientProvider>

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { TextField, Box, Typography, Button, Alert, AlertTitle, Snackbar } from '@mui/material';
+import { TextField, Box, Typography, Button } from '@mui/material';
 import API, { updateApiAuthorization } from 'api';
+import { useSnackbar } from 'contexts/snackbar';
 import { useUser } from 'contexts/user';
 import { FormEvent, useState } from 'react';
 import { useMutation } from 'react-query';
@@ -25,7 +26,7 @@ function Login() {
 		password: ''
 	});
 
-	const [loginError, setLoginError] = useState({ open: false, message: '' });
+	const snackbar = useSnackbar();
 
 	const history = useHistory();
 	const [, setUser] = useUser();
@@ -46,7 +47,11 @@ function Login() {
 			history.replace('/');
 		},
 		onError: (error: { message: string }) => {
-			setLoginError({ open: true, message: error?.message });
+			snackbar({
+				status: "error",
+				title: "Could not login",
+				message: error?.message
+			})
 		}
 	})
 
@@ -57,20 +62,6 @@ function Login() {
 
 	return (
 		<AuthLayout>
-			<Snackbar 
-				open={loginError.open}
-				autoHideDuration={6000} 
-				anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-				onClose={(_, reason) => {
-					if (reason === 'clickaway') return;
-					setLoginError({ open: false, message: '' });
-				}}
-			>
-				<Alert severity='error'>
-					<AlertTitle>Error</AlertTitle>
-					{loginError.message}
-				</Alert>
-			</Snackbar>
 			<FormContainer>
 				<form onSubmit={handleSubmit}>
 					<Box mb={5}>

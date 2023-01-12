@@ -5,9 +5,9 @@ import ArrowDown from './ArrowDown';
 import Thrash from './Trash';
 
 export {
-    Plus,
-    DollarSign,
-    ArrowUp,
-    ArrowDown,
-    Thrash
+  Plus,
+  DollarSign,
+  ArrowUp,
+  ArrowDown,
+  Thrash
 }
