@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Box, Typography } from '@mui/material';
 import { ArrowUp, DollarSign, ArrowDown } from 'components/icons';
 import UnlinkAccount from 'components/UnlinkAccount';
+import { useHistory } from 'react-router-dom';
 import { currencyFormatter } from 'utilities';
 
 const AccountCard = styled(Box)`
@@ -22,6 +23,12 @@ interface AccountProps {
 }
 
 function Account({ account, ...props }: AccountProps) {
+  const history = useHistory();
+
+  const goToAccountTransactions = () => {
+    history.push(`/transactions?account=${account.id}`)
+  };
+
   return (
     <AccountCard {...props}>
       <Box sx={{ width: "50px", bgcolor: "black", borderRadius: "5px", display: "flex", alignItems: "center", justifyContent: "center" }} mr={5}>
@@ -42,7 +49,7 @@ function Account({ account, ...props }: AccountProps) {
         <Box mr={2} sx={{ cursor: "pointer" }}>
           <UnlinkAccount account={account} />
         </Box>
-        <Box>
+        <Box sx={{ cursor: "pointer" }} onClick={goToAccountTransactions}>
           <ArrowDown color='green' size={16} />
           <ArrowUp color='red' size={16} />
         </Box>

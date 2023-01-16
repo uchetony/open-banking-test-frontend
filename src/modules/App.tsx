@@ -28,13 +28,13 @@ function App() {
               <ProtectedRoute path="/" exact>
                 <Home />
               </ProtectedRoute>
-              <PublicRoute path="/login">
+              <PublicRoute path="/login" exact>
                 <Login />
               </PublicRoute>
               <ProtectedRoute path="/transactions" exact>
                 <TransactionsList />
               </ProtectedRoute>
-              <ProtectedRoute path="/budgets">
+              <ProtectedRoute path="/budgets" exact>
                 <Budgets />
               </ProtectedRoute>
             </Switch>
