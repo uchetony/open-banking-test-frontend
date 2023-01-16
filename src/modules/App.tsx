@@ -11,6 +11,7 @@ import { SnackbarProvider } from 'contexts/snackbar';
 const Home = lazy(() => import('./home/Home'));
 const Login = lazy(() => import('./auth/Login'));
 const TransactionsList = lazy(() => import('./transactions/TransactionsList'));
+const Budgets = lazy(() => import('./budgets/Budgets'));
 
 function App() {
   const isFetching = useIsFetching();
@@ -32,6 +33,9 @@ function App() {
               </PublicRoute>
               <ProtectedRoute path="/transactions" exact>
                 <TransactionsList />
+              </ProtectedRoute>
+              <ProtectedRoute path="/budgets">
+                <Budgets />
               </ProtectedRoute>
             </Switch>
           </Router>

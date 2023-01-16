@@ -27,6 +27,7 @@ function AppLayout({ children }: { children: JSX.Element }) {
 	const sideNavLinks = [
 		{ name: "Home", link: "/" },
 		{ name: "Transactions", link: "/transactions" },
+		{ name: "Budgets", link: "/budgets" },
 	];
 
 	const handleLogOut = () => {
