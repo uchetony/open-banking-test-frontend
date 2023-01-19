@@ -2,29 +2,29 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const SideNav = styled(Box)`
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 350px;
-    padding: 0 50px;
+const Header= styled(Box)`
+	display: flex;
+	height: 70px;
+	margin-bottom: 50px;
 `
 
-const LinkContainer = styled(Box)`
+const StyledLink = styled(Link)`
     cursor: pointer;
-    padding: 10px 0px;
+    padding: 10px 20px;
+		text-decoration: none;
+		color: #020100;
+		margin-right: 20px;
 
     :hover {
-        padding: 10px 5px;
-        background-color: black;
+        background-color: #020100;
         border-radius: 5px;
         color: white;
+				font-weight: bold;
     }
 `
 
 function AppLayout({ children }: { children: JSX.Element }) {
-	const sideNavLinks = [
+	const headerItems = [
 		{ name: "Home", link: "/" },
 		{ name: "Transactions", link: "/transactions" },
 		{ name: "Budgets", link: "/budgets" },
@@ -36,36 +36,28 @@ function AppLayout({ children }: { children: JSX.Element }) {
 	}
 
 	return (
-		<Box display="flex">
-			<SideNav display="flex" flexDirection="column">
-				<Box mt="50px" height="100px" display="flex" alignItems="center" borderBottom="1px solid black">
-					<h1 style={{ margin: "0" }}>Openbank</h1>
+		<Box sx={{ padding: "50px 100px" }}>
+			<Header>
+				<Box sx={{ display: "flex", alignItems: "center"  }} width={2/12}>
+					<Typography fontSize={16}>Logo</Typography>
 				</Box>
-				<Box pt="100px" height="calc(100vh - 50px - 100px - 100px)">
-					{sideNavLinks.map(({ name, link }) => (
-						<Link to={link} style={{ textDecoration: 'none', color: 'currentcolor' }} key={name}>
-							<LinkContainer mb="20px">
-								<Typography variant="body1" fontSize="20px">{name}</Typography>
-							</LinkContainer>
-						</Link>
+				<Box sx={{ display: "flex", alignItems: "center" }} width={6/12}>
+					{headerItems.map(({name, link}) => (
+						<StyledLink to={link}>
+							<Typography fontSize={16}>{name}</Typography>
+						</StyledLink>
 					))}
 				</Box>
-				<Box height="100px" borderTop="1px solid black" display="flex" alignItems="center">
-					<LinkContainer width="100%" onClick={() => handleLogOut()}>
-						<Typography variant="body1" fontSize="20px">Log out</Typography>
-					</LinkContainer>
+				<Box width={4/12} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
+					<Box>
+						<Typography fontSize={16}>Anthony Uche</Typography>
+					</Box>
 				</Box>
-			</SideNav>
+			</Header>
 
-			<Box ml="400px" position="fixed" width="calc(100% - 400px)" px="50px">
-				<Box height="100px" mt="50px" display="flex" alignItems="center" pr="50px" borderBottom="1px solid black">
-					<Box>Header</Box>
-				</Box>
-				<Box mt="100px">
-					{children}
-				</Box>
+			<Box>
+				{children}
 			</Box>
-
 		</Box>
 	)
 }
