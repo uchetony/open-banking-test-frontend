@@ -2,25 +2,34 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
+const AppLayoutContainer = styled(Box)`
+	height: 100vh;
+	width: 100%;
+	padding: 10px 100px;
+	background-color: #F3F4f7;
+`
+
 const Header= styled(Box)`
+	width: 100%;
 	display: flex;
 	height: 70px;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 `
 
 const StyledLink = styled(Link)`
     cursor: pointer;
-    padding: 10px 20px;
 		text-decoration: none;
-		color: #020100;
-		margin-right: 20px;
+`
 
-    :hover {
-        background-color: #020100;
-        border-radius: 5px;
-        color: white;
-				font-weight: bold;
-    }
+const StyledTypography = styled(Typography)`
+	padding: 10px 20px;
+	margin-right: 20px;
+	color: #525C7A;
+	font-weight: 500;
+
+	:hover {
+		color: #020100;
+	}
 `
 
 function AppLayout({ children }: { children: JSX.Element }) {
@@ -36,21 +45,21 @@ function AppLayout({ children }: { children: JSX.Element }) {
 	}
 
 	return (
-		<Box sx={{ padding: "50px 100px" }}>
+		<AppLayoutContainer>
 			<Header>
-				<Box sx={{ display: "flex", alignItems: "center"  }} width={2/12}>
-					<Typography fontSize={16}>Logo</Typography>
+				<Box sx={{ display: "flex", alignItems: "center"  }} width={1/12}>
+					<Typography>Logo</Typography>
 				</Box>
-				<Box sx={{ display: "flex", alignItems: "center" }} width={6/12}>
+				<Box sx={{ display: "flex", alignItems: "center" }} width={7/12}>
 					{headerItems.map(({name, link}) => (
 						<StyledLink to={link}>
-							<Typography fontSize={16}>{name}</Typography>
+							<StyledTypography>{name}</StyledTypography>
 						</StyledLink>
 					))}
 				</Box>
 				<Box width={4/12} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
 					<Box>
-						<Typography fontSize={16}>Anthony Uche</Typography>
+						<Typography fontWeight={500}>Anthony Uche</Typography>
 					</Box>
 				</Box>
 			</Header>
@@ -58,7 +67,7 @@ function AppLayout({ children }: { children: JSX.Element }) {
 			<Box>
 				{children}
 			</Box>
-		</Box>
+		</AppLayoutContainer>
 	)
 }
 

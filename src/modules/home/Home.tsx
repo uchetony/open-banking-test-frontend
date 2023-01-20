@@ -25,6 +25,46 @@ function Home() {
 	return (
 		<AppLayout>
 			<Box>
+				<Box sx={{ display: "flex", justifyContent: "space-between" }} mb={3}>
+					<Box sx={{ height: "300px", backgroundColor: "white", borderRadius: "15px", mr: "40px" }} width={7/12}></Box>
+					<Box sx={{ height: "300px", backgroundColor: "#020100", borderRadius: "15px" }} width={5/12}></Box>
+				</Box>
+
+				<Box>
+					{isLoading && (
+						<Box sx={{ textAlign: "center", margin: "0 auto" }}>
+							<CircularProgress />
+							<Typography mt={2}>Fetching accounts</Typography>
+						</Box>
+					)}
+
+					{!isLoading && (
+						<Box>
+							<Box mb={3}>
+								{!accounts?.length ? (
+									<Box sx={{ display: "flex", justifyContent: 'center' }}>
+										<Typography>
+											No accounts
+										</Typography>
+									</Box>
+								) : null}
+
+								<Box sx={{ display: "flex" }}>
+									{accounts?.length ? (accounts.map((account: any) => (
+										<Account key={account.institution.bankCode} account={account} />
+									))) : null}
+								</Box>
+							</Box>
+
+							<Box sx={{ display: "flex", justifyContent: "space-between" }}>
+								<Box sx={{ height: "300px", backgroundColor: "white", borderRadius: "15px", mr: "40px" }} width={7/12}></Box>
+								<Box sx={{ height: "300px", backgroundColor: "white", borderRadius: "15px" }} width={5/12}></Box>
+							</Box>
+						</Box>
+					)}
+				</Box>
+			</Box>
+			{/* <Box>
 				<Box display="inline-block" width="100%">
 					<Box display="flex" alignItems="center" justifyContent="space-between">
 						<Typography fontSize={24} fontWeight={700}>Accounts</Typography>
@@ -38,25 +78,9 @@ function Home() {
 								<Typography mt={2}>Fetching accounts</Typography>
 							</Box>
 						)}
-
-						{!isLoading && (
-							<Box>
-								{!accounts?.length ? (
-									<Box sx={{ display: "flex", justifyContent: 'center' }}>
-										<Typography>
-											No accounts
-										</Typography>
-									</Box>
-								) : null}
-
-								{accounts?.length ? (accounts.map((account: any) => (
-									<Account key={account.institution.bankCode} account={account} />
-								))) : null}
-							</Box>
-						)}
 					</Box>
 				</Box>
-			</Box>
+			</Box> */}
 		</AppLayout>
 	)
 }
