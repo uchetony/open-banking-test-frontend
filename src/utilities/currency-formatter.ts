@@ -1,6 +1,10 @@
-export default function currencyFormatter(currency: string, amount: number) {
-    return new Intl.NumberFormat('en-US', {
+export default function currencyFormatter(amount: number, currency?: string) {
+  const options = currency
+    ? {
         style: 'currency',
-        currency
-    }).format(amount/100)
-};
+        currency,
+      }
+    : undefined;
+
+  return new Intl.NumberFormat('en-US', options).format(amount / 100);
+}

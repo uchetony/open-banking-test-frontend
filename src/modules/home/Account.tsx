@@ -1,5 +1,11 @@
+import React from 'react';
 import styled from '@emotion/styled';
-import { Box, getAccordionActionsUtilityClass, Switch, Typography } from '@mui/material';
+import {
+  Box,
+  getAccordionActionsUtilityClass,
+  Switch,
+  Typography,
+} from '@mui/material';
 import { ArrowUp, DollarSign, ArrowDown } from 'components/icons';
 import UnlinkAccount from 'components/UnlinkAccount';
 import { useState } from 'react';
@@ -7,27 +13,27 @@ import { useHistory } from 'react-router-dom';
 import { currencyFormatter } from 'utilities';
 
 const AccountCard = styled(Box)`
-height: auto;
-padding: 20px;
-background-color: white;
-margin-right: 40px;
-border-radius: 15px;
-display: flex;
-justify-content: "space-between";
+  height: auto;
+  padding: 20px;
+  background-color: white;
+  margin-right: 40px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: 'space-between';
 
-:last-child {
-  margin-right: 0;
-}
-`
+  :last-child {
+    margin-right: 0;
+  }
+`;
 
 const ACCOUNT_TYPE_MAP: Record<string, string> = {
-  'personal_banking': 'Personal banking',
-  'savings_account': 'Savings account'
-}
+  personal_banking: 'Personal banking',
+  savings_account: 'Savings account',
+};
 
 interface AccountProps {
-  key?: string,
-  account: any
+  key?: string;
+  account: any;
 }
 
 function Account({ account, ...props }: AccountProps) {
@@ -35,29 +41,54 @@ function Account({ account, ...props }: AccountProps) {
   const [showAccountBalance, setShowAccountBalance] = useState(false);
 
   const goToAccountTransactions = () => {
-    history.push(`/transactions?account=${account.id}`)
+    history.push(`/transactions?account=${account.id}`);
   };
 
   return (
-    <AccountCard {...props} width={3/12}>
-      <Box sx={{ display: "flex", flexDirection: "column" }} width={8/12}>
+    <AccountCard {...props} width={3 / 12}>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }} width={8 / 12}>
         <Box mb={3}>
-          <Typography fontWeight={700} color="#020100">{account.institution.name}</Typography>
+          <Typography fontWeight={700} color="#020100">
+            {account.institution.name}
+          </Typography>
           <Typography color="#B6BCCE">{account.accountNumber}</Typography>
         </Box>
 
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography fontSize={20} fontWeight={700} mr={1}>
-              {showAccountBalance ? currencyFormatter(account.currency, account.balance) : 'NGN ****'}
-            </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography fontSize={20} fontWeight={700} mr={1}>
+            {showAccountBalance
+              ? currencyFormatter(account.balance, account.currency)
+              : 'NGN ****'}
+          </Typography>
 
-          <Switch defaultChecked={false} value={showAccountBalance} onChange={() => setShowAccountBalance(!showAccountBalance)}/>
+          <Switch
+            defaultChecked={false}
+            value={showAccountBalance}
+            onChange={() => setShowAccountBalance(!showAccountBalance)}
+          />
         </Box>
       </Box>
 
-      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }} width={4/12}>
-        <Box sx={{ width: "50px", height: "50px", backgroundColor: "black", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "5px" }}>
-          <DollarSign color='white' size={16} />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+        }}
+        width={4 / 12}
+      >
+        <Box
+          sx={{
+            width: '50px',
+            height: '50px',
+            backgroundColor: 'black',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '5px',
+          }}
+        >
+          <DollarSign color="white" size={16} />
         </Box>
       </Box>
       {/* <Box sx={{ width: "50px", bgcolor: "black", borderRadius: "5px", display: "flex", alignItems: "center", justifyContent: "center" }} mr={5}>
@@ -84,7 +115,7 @@ function Account({ account, ...props }: AccountProps) {
         </Box>
       </Box> */}
     </AccountCard>
-  )
+  );
 }
 
 export default Account;
