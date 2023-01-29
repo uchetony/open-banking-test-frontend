@@ -1,16 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {
-  Box,
-  getAccordionActionsUtilityClass,
-  Switch,
-  Typography,
-} from '@mui/material';
-import { ArrowUp, DollarSign, ArrowDown } from 'components/icons';
-import UnlinkAccount from 'components/UnlinkAccount';
+import { Box, Switch, Typography } from '@mui/material';
+import { DollarSign } from 'components/icons';
+// import UnlinkAccount from 'components/UnlinkAccount';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { currencyFormatter } from 'utilities';
+import { Account as AccountType } from 'types';
 
 const AccountCard = styled(Box)`
   height: auto;
@@ -26,23 +22,23 @@ const AccountCard = styled(Box)`
   }
 `;
 
-const ACCOUNT_TYPE_MAP: Record<string, string> = {
-  personal_banking: 'Personal banking',
-  savings_account: 'Savings account',
-};
+// const ACCOUNT_TYPE_MAP: Record<string, string> = {
+//   personal_banking: 'Personal banking',
+//   savings_account: 'Savings account',
+// };
 
 interface AccountProps {
   key?: string;
-  account: any;
+  account: AccountType;
 }
 
 function Account({ account, ...props }: AccountProps) {
-  const history = useHistory();
+  // const history = useHistory();
   const [showAccountBalance, setShowAccountBalance] = useState(false);
 
-  const goToAccountTransactions = () => {
-    history.push(`/transactions?account=${account.id}`);
-  };
+  // const goToAccountTransactions = () => {
+  //   history.push(`/transactions?account=${account.id}`);
+  // };
 
   return (
     <AccountCard {...props} width={3 / 12}>

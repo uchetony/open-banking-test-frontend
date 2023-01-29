@@ -7,6 +7,7 @@ import { Box, ThemeProvider } from '@mui/material';
 import { useIsFetching, useIsMutating } from 'react-query';
 import GlobalLoadingIndicator from 'components/GlobalLoadingIndicator';
 import { SnackbarProvider } from 'contexts/snackbar';
+
 import theme from '../theme';
 
 const Home = lazy(() => import('./home/Home'));

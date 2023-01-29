@@ -6,8 +6,13 @@ import { useSnackbar } from 'contexts/snackbar';
 import AppLayout from 'layouts/AppLayout';
 import useLinkAccount from 'hooks/useLinkAccount';
 import { currencyFormatter } from 'utilities';
+import { APISuccessResponse, Transaction, Account } from 'types';
 
-import Account from './Account';
+import AccountCard from './Account';
+
+type FetchAccountsPromise = Promise<APISuccessResponse<Account[]>>;
+
+type FetchTransactionsPromise = Promise<APISuccessResponse<Transaction[]>>;
 
 function Home() {
   const snackbar = useSnackbar();
@@ -17,7 +22,7 @@ function Home() {
     data: accounts,
     isLoading: isFetchingAccounts,
     isSuccess: hasFetchedAccounts,
-  } = useQuery('accounts', () => API.get('accounts'), {
+  } = useQuery('accounts', (): FetchAccountsPromise => API.get('accounts'), {
     select: ({ data }) => data,
     onError: () => {
       snackbar({
@@ -30,17 +35,15 @@ function Home() {
 
   const accountId = accounts ? accounts[0]?.id : '';
 
-  const { data: recentTransactions, isLoading: isFetchingAccountTransactions } =
-    useQuery(
-      ['Transactions', accountId],
-      () => API.get(`accounts/${accountId}/transactions`),
-      {
-        select: ({ data }) => data.slice(0, 10),
-        enabled: !!accounts?.length,
-      }
-    );
-
-  console.log(recentTransactions);
+  const { data: recentTransactions } = useQuery(
+    ['Transactions', accountId],
+    (): FetchTransactionsPromise =>
+      API.get(`accounts/${accountId}/transactions`),
+    {
+      select: ({ data }) => data.slice(0, 10),
+      enabled: !!accounts?.length,
+    }
+  );
 
   return (
     <AppLayout>
@@ -103,8 +106,8 @@ function Home() {
                 {accounts?.length ? (
                   <Box>
                     <Box mb={3} sx={{ display: 'flex' }}>
-                      {accounts.map((account: any) => (
-                        <Account
+                      {accounts.map((account) => (
+                        <AccountCard
                           key={account.institution.bankCode}
                           account={account}
                         />
@@ -130,13 +133,7 @@ function Home() {
 
                         <Box mt={5}>
                           {recentTransactions?.map(
-                            ({
-                              _id,
-                              narration,
-                              currency,
-                              amount,
-                              type,
-                            }: any) => (
+                            ({ _id, narration, currency, amount, type }) => (
                               <Box
                                 key={_id}
                                 display="flex"
