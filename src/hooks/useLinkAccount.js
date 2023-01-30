@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import MonoConnect from '@mono.co/connect.js';
 import { useSnackbar } from 'contexts/snackbar';
 import { useMutation, useQueryClient } from 'react-query';
+import API from 'api';
 
 function useLinkAccount() {
   const queryClient = useQueryClient();

@@ -19,10 +19,11 @@ export type Account = {
 };
 
 export type Transaction = {
+  addAccount: boolean;
   amount: number;
   balance: number;
   currency: string;
-  date: Date | string;
+  date: Date | string | number;
   narration: string;
   type: string; // 'debit' | 'credit'
   _id: string;

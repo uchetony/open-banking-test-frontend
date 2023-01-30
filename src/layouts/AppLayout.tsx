@@ -4,17 +4,21 @@ import { Box, Divider, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const AppLayoutContainer = styled(Box)`
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
+  min-width: 1400px;
   width: 100%;
-  padding: 10px 100px;
   background-color: #f3f4f7;
 `;
 
 const Header = styled(Box)`
+  position: fixed;
+  left: 0;
   width: 100%;
   display: flex;
   height: 70px;
-  margin-bottom: 20px;
+  background-color: #f3f4f7;
+  z-index: 100;
 `;
 
 const StyledLink = styled(Link)`
@@ -46,8 +50,8 @@ function AppLayout({ children }: { children: JSX.Element }) {
   };
 
   return (
-    <AppLayoutContainer>
-      <Header>
+    <AppLayoutContainer px={10}>
+      <Header px={10}>
         <Box sx={{ display: 'flex', alignItems: 'center' }} width={1 / 12}>
           <Typography>Logo</Typography>
         </Box>
@@ -75,8 +79,7 @@ function AppLayout({ children }: { children: JSX.Element }) {
           </Box>
         </Box>
       </Header>
-
-      <Box>{children}</Box>
+      <Box pt={10}>{children}</Box>
     </AppLayoutContainer>
   );
 }
